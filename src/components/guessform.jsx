@@ -14,22 +14,19 @@ export default class GuessForm extends React.PureComponent {
   userSubmit = event => { 
     event.preventDefault()
     const userInput = parseInt(this.state.userInput, 0); 
-    //this.inputNode.value
     this.props.onInput(userInput);
     this.setState({userInput: ''}); 
-    console.log('form submit ->', userInput);
   }
 
   userInputChange = event => {
     this.setState({userInput: event.target.value});
   }
 
-  // ref={node => this.inputNode = node} ?
   render() {
     return ( 
       <form className="guessForm" onSubmit={(event)=> this.userSubmit(event)} style={styles.guessForm}>
         <input type="text" name="userInput" className="guessInput" style={styles.guessInput} 
-          onChange={this.userInputChange} value={this.state.userInput} placeholder="enter a number"/>   
+          onChange={this.userInputChange} value={this.state.userInput} />   
         <button type="submit" id="submit" style={styles.submitBtn}>Submit</button>
       </form>
     )
@@ -61,5 +58,3 @@ const styles = {
     padding: 7
   }
 }
-
-// how to pass input value to app.js? 

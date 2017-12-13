@@ -1,14 +1,16 @@
 import React from 'react';
 
-// export default class ShowGuesses extends React.Component { 
-
-export const ShowGuesses = props => 
-  <div className="inputContainer" style={styles.inputContainer}>
+const ShowGuesses = props => {
+  return (
+    <div className="inputContainer" style={styles.inputContainer}>
       <ul className="guessList" style={styles.guessList}>
-        <li className="guess"> </li>
+        {props.guessList.map((guess, index) => (
+          <li key={index} className="guess">{guess}</li>
+        ))}
       </ul>
-    </div>;
-
+    </div>
+  )
+}
 
 const styles = {
   inputContainer: {
@@ -25,4 +27,4 @@ const styles = {
   }
 }
 
-// how to manage the array...? 
+export default ShowGuesses;

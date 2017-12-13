@@ -1,8 +1,9 @@
 import React from 'react';
 
 export default function getTargetNum() {
-  const targetNumber = 
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; 
+  let min = Math.ceil(min);
+  let max = Math.floor(max);
+  const targetNumber = Math.floor(Math.random() * (max - min + 1)) + min; 
 }
+
+//Math.floor((Math.random() * 100) + 1);

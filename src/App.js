@@ -18,7 +18,7 @@ export default class App extends Component {
   
   newGame() {
     this.setState({
-      targetNumber: targetNum(), //? 
+      targetNumber: targetNum(), 
       gameWon: false,
       guesses: [],
       feedback: '',
@@ -31,14 +31,9 @@ export default class App extends Component {
       return;
     }
 
-    console.log('guess ->', guess);
-
     let target = this.state.targetNumber;
-    console.log('target var ->', target);
 
     guess = parseInt(guess, 10);
-
-    console.log('handle guess function->', this.state);
 
     if(isNaN(guess)) {
       this.setState({
@@ -93,7 +88,7 @@ export default class App extends Component {
 
         <GuessForm onInput={guess => this.handleGuess(guess)}/>  
         
-        <ShowGuesses guessList={this.state.guesses} />
+        <ShowGuesses guessList={this.state.guesses} /> 
 
       </div>
     );

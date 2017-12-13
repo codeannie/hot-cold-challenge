@@ -3,18 +3,32 @@ import React from 'react';
 // or export function GuessForm(props) {}  // no render() needed; just return 
   
 export default class GuessForm extends React.PureComponent { 
-  handleSubmit = event => {  //vs handleSubmit(e) => {}?
+  state = {
+    userInput: ''
+  }
+
+  setInputValue(userInput) {
+    this.setState({userInput})
+  }
+
+  userSubmit = event => { 
     event.preventDefault()
-    const userInput = event.target.elements.guessNumber.value 
+    const userInput = parseInt(this.state.userInput, 0); 
     //this.inputNode.value
+    this.setState({userInput: ''}); //?
+  }
+
+  userInputChange = event => {
+    this.setState({userInput: event.target.value});
   }
 
   // ref={node => this.inputNode = node} ?
   render() {
     return ( 
-      <form className="guessForm" onSubmit={this.handleSubmit} style={styles.guessForm}>
-        <input type="text" name="guessNumber" className="guessInput" style={styles.guessInput} placeholder="enter a number"/>   
-        <button type="submit" id="submit" className="submitBtn" style={styles.submitBtn}>Submit</button>
+      <form className="guessForm" onSubmit={this.userSubmit} style={styles.guessForm}>
+        <input type="text" name="userInput" className="guessInput" style={styles.guessInput} 
+          onChange={this.userInputChange} value={this.state.userInput} placeholder="enter a number"/>   
+        <button type="submit" id="submit" style={styles.submitBtn}>Submit</button>
       </form>
     )
   }
@@ -46,3 +60,5 @@ const styles = {
     padding: 7
   }
 }
+
+// how to pass input value to app.js? 

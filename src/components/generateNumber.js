@@ -8,4 +8,3 @@
 export default function targetNum() { 
   return Math.floor((Math.random() * 100) + 1);
 }
-console.log('target function->', targetNum());

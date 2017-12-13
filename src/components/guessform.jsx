@@ -13,8 +13,7 @@ export default class GuessForm extends React.PureComponent {
   render() {
     return ( 
       <form className="guessForm" onSubmit={this.handleSubmit} style={styles.guessForm}>
-        <label for="SubmitAGuess" className="guessLabel" style={styles.guessLabel}>Enter a Number:</label>
-          <input type="text" name="guessNumber" className="guessInput" style={styles.guessInput} placeholder="Enter a Guess"/>   
+        <input type="text" name="guessNumber" className="guessInput" style={styles.guessInput} placeholder="enter a number"/>   
         <button type="submit" id="submit" className="submitBtn" style={styles.submitBtn}>Submit</button>
       </form>
     )
@@ -23,22 +22,25 @@ export default class GuessForm extends React.PureComponent {
 
 const styles = {
   guessForm: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  guessLabel: {
     display: 'block',
-    textAlign: 'center'
+    margin: '0 auto'
   },
   guessInput: {
+    textAlign: 'center',
     height: 'auto',
+    width: 300,
+    marginBottom: 10,
     fontSize: 20,
     border: 'none',
-    borderBottom: '2px solid red'
+    borderBottom: '2px solid #bbbebf'
   },
   submitBtn: {
+    display: 'block',
+    margin: '0 auto',
+    fontSize: 14,
+    width: 100, 
     border: 0,
+    border: '1px solid black',
     borderRadius: 3,
     cursor: 'pointer',
     padding: 7

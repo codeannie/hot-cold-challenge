@@ -4,35 +4,76 @@ import './App.css';
 
 import GuessForm from './components/guessform';
 import showGuesses from './components/showGuesses';
-import generateNumber from './components/generateNumber';
+import getTargetNum from './components/generateNumber';
+// import targetNumber from './components/generateNumber';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
       this.state = {
         targetNumber: 0,
+        gameWon: false,
         guesses: [],
-        feedback: '',
+        feedback: 'Make a guess first!',
     }
   }
+  
+  newGame() {
+    this.setState({
+      targetNumber: 0,
+      gameWon: false,
+      guesses: [],
+      feedback: 'Make a guess first!',
+    })
+  }
+  handleGuess(guess) {
+    // if(this.state.gameWon) {
+    //   return;
+    // }
 
-    guessForm() {
-      // this.setState = {
+    let target = getTargetNum();
+    guess = parseInt(guess, 10);
+
+    this.setState({
+      feedback,
+      guesses:[...this.state.guesses, guess]
+    });
+
+    if(isNaN(guess)) {
+      this.setState({
+        feedback: 'Please enter a valid number'
+      });
+      return;
     }
 
-    generateNumber() {
-      this.setState = {targetNumber: generateNumber()}
-    }
-
+    let feedback; 
+    if(guess === target) {
+      this.setState({
+        gameWon: true,
+        feedback: 'Congrats, you guessed the correct number!'
+      });
+      return;
+      } else if( guess >= 50) {
+        feedback = 'Brrr, it\'s so cold';
+      } else if (guess >= 30) {
+        feedback = 'It\'s a little cold';
+      } else if (guess >= 10) {
+        feedback = 'Woah, it got warm just now';
+      } else if (guess >= 5) {
+        feedback = 'You\'re getting close to the sun!';
+      } else if (guess >= 1) {
+        feedback = 'Get the ice cubes! It\'s hot in here';
+      }
     }
 
   render() {
-    // render vs return?
+    const { guesses, feedback} = this.state;
 
     return (
       <div className="App">
-        <header className="Hot-Cold-Game">
+        <header className="App-Header">
           <h1 className="App-title">Hot & Cold Game</h1>
+          <button className="new-game-btn">New Game</button>
         </header>
 
         <p className="game-intro">
@@ -40,9 +81,9 @@ export default class App extends Component {
         </p>
 
         <GuessForm />  
+        <showGuesses />
 
       </div>
     );
   }
 }
-

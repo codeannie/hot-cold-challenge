@@ -29,7 +29,7 @@ const styles = {
   },
   guess: {
     marginRight: 10,
-    fontSize: 14
+    fontSize: 18
   }
 }
 

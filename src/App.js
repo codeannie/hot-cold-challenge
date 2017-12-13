@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import './App.css';
 
 import GuessForm from './components/guessform';
-import { ShowGuesses } from './components/showGuesses';
+import ShowGuesses from './components/showGuesses';
 import targetNum from './components/generateNumber';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        targetNumber: 0,
+        targetNumber: targetNum(),
         gameWon: false,
         guesses: [],
-        feedback: 'Make a guess first!',
+        feedback: '',
     }
   }
   
@@ -21,9 +21,11 @@ export default class App extends Component {
       targetNumber: targetNum(), //? 
       gameWon: false,
       guesses: [],
-      feedback: 'Make a guess first!',
+      feedback: '',
     })
+    console.log('new game started!');
   }
+
   handleGuess(guess) {
     if(this.state.gameWon) {
       return;
@@ -31,15 +33,12 @@ export default class App extends Component {
 
     console.log('guess ->', guess);
 
-    let target = this.setState({targetNumber: targetNum()});
-    console.log('handle guess, target ->', this.state);
-    
+    let target = this.state.targetNumber;
+    console.log('target var ->', target);
+
     guess = parseInt(guess, 10);
 
-    this.setState({
-      feedback,
-      guesses:[...this.state.guesses, guess]
-    });
+    console.log('handle guess function->', this.state);
 
     if(isNaN(guess)) {
       this.setState({
@@ -48,13 +47,15 @@ export default class App extends Component {
       return;
     }
 
-    let feedback; 
+    let feedback;
+
     if(guess === target) {
       this.setState({
         gameWon: true,
         feedback: 'Congrats, you guessed the correct number!'
       });
       return;
+
       } else if( guess >= 50) {
         feedback = 'Brrr, it\'s so cold';
       } else if (guess >= 30) {
@@ -66,6 +67,12 @@ export default class App extends Component {
       } else if (guess >= 1) {
         feedback = 'Get the ice cubes! It\'s hot in here';
       }
+
+      this.setState({
+        feedback,
+        guesses:[...this.state.guesses, guess]
+      });
+  
     }
 
   render() {
@@ -82,7 +89,6 @@ export default class App extends Component {
           Guess the number between 1 and 100!
         </p>
 
-        {/* how to get this to only show after 1st input?  */}
         <p className="feedback">{this.state.feedback}</p>
 
         <GuessForm onInput={guess => this.handleGuess(guess)}/>  
@@ -99,7 +105,6 @@ const styles = {
     marginTop: 10,
     fontSize: 14,
     width: 100, 
-    border: 0,
     border: '1px solid green',
     borderRadius: 3,
     cursor: 'pointer',

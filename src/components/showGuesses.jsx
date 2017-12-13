@@ -5,7 +5,7 @@ const ShowGuesses = props => {
     <div className="inputContainer" style={styles.inputContainer}>
       <ul className="guessList" style={styles.guessList}>
         {props.guessList.map((guess, index) => (
-          <li key={index} className="guess">{guess}</li>
+          <li key={index} className="guess" style={styles.guess}> {guess} </li>
         ))}
       </ul>
     </div>
@@ -14,16 +14,22 @@ const ShowGuesses = props => {
 
 const styles = {
   inputContainer: {
-    backgroundColor: 'blue',
-    border: 'red',
+    margin: '0 auto',
+    marginTop: 10,
+    width: 350,
   },
   guessList: {
     display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    alignContent: 'center',
+    margin: 0,
+    padding: 5,
     listStyle: 'none'
   },
   guess: {
-    border: '1px solid blue',
-    fontSize: 12
+    marginRight: 10,
+    fontSize: 14
   }
 }
 

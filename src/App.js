@@ -3,9 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 import GuessForm from './components/guessform';
-import showGuesses from './components/showGuesses';
-import getTargetNum from './components/generateNumber';
-// import targetNumber from './components/generateNumber';
+import { ShowGuesses } from './components/showGuesses';
+import targetNum from './components/generateNumber';
 
 export default class App extends Component {
   constructor(props) {
@@ -20,18 +19,22 @@ export default class App extends Component {
   
   newGame() {
     this.setState({
-      targetNumber: 0,
+      targetNumber: targetNum(), //? 
       gameWon: false,
       guesses: [],
       feedback: 'Make a guess first!',
     })
   }
   handleGuess(guess) {
-    // if(this.state.gameWon) {
-    //   return;
-    // }
+    if(this.state.gameWon) {
+      return;
+    }
 
-    let target = getTargetNum();
+    console.log('guess ->', guess);
+
+    let target = this.setState({targetNumber: targetNum()});
+    console.log('handle guess, target ->', this.state);
+    
     guess = parseInt(guess, 10);
 
     this.setState({
@@ -72,18 +75,35 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="App-Header">
+          <button className="new-game-btn" style={styles.button} onClick={(e)=>this.newGame()}>New Game</button>
           <h1 className="App-title">Hot & Cold Game</h1>
-          <button className="new-game-btn">New Game</button>
         </header>
 
         <p className="game-intro">
           Guess the number between 1 and 100!
         </p>
 
-        <GuessForm />  
-        <showGuesses />
+        {/* how to get this to only show after 1st input?  */}
+        <p className="feedback">{this.state.feedback}</p>
+
+        <GuessForm onInput={guess => this.handleGuess(guess)}/>  
+        
+        <ShowGuesses guessList={this.state.guesses} />
 
       </div>
     );
+  }
+}
+
+const styles = {
+  button: {
+    marginTop: 10,
+    fontSize: 14,
+    width: 100, 
+    border: 0,
+    border: '1px solid green',
+    borderRadius: 3,
+    cursor: 'pointer',
+    padding: 7
   }
 }

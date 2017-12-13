@@ -15,7 +15,9 @@ export default class GuessForm extends React.PureComponent {
     event.preventDefault()
     const userInput = parseInt(this.state.userInput, 0); 
     //this.inputNode.value
-    this.setState({userInput: ''}); //?
+    this.props.onInput(userInput);
+    this.setState({userInput: ''}); 
+    console.log('form submit ->', userInput);
   }
 
   userInputChange = event => {
@@ -25,7 +27,7 @@ export default class GuessForm extends React.PureComponent {
   // ref={node => this.inputNode = node} ?
   render() {
     return ( 
-      <form className="guessForm" onSubmit={this.userSubmit} style={styles.guessForm}>
+      <form className="guessForm" onSubmit={(event)=> this.userSubmit(event)} style={styles.guessForm}>
         <input type="text" name="userInput" className="guessInput" style={styles.guessInput} 
           onChange={this.userInputChange} value={this.state.userInput} placeholder="enter a number"/>   
         <button type="submit" id="submit" style={styles.submitBtn}>Submit</button>
@@ -53,7 +55,6 @@ const styles = {
     margin: '0 auto',
     fontSize: 14,
     width: 100, 
-    border: 0,
     border: '1px solid black',
     borderRadius: 3,
     cursor: 'pointer',

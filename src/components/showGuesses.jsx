@@ -17,6 +17,7 @@ const styles = {
     listStyle: 'none'
   },
   guess: {
-    
+    border: '1px solid blue',
+    fontSize: 12
   }
 }

@@ -32,7 +32,6 @@ export default class App extends Component {
     }
 
     let target = this.state.targetNumber;
-
     guess = parseInt(guess, 10);
 
     if(isNaN(guess)) {
@@ -42,6 +41,7 @@ export default class App extends Component {
       return;
     }
 
+    const guessDiff = Math.abs(target - guess);
     let feedback;
 
     if(guess === target) {
@@ -51,23 +51,25 @@ export default class App extends Component {
       });
       return;
 
-      } else if( guess >= 50) {
+      } else if ( guessDiff  >= 50) {
         feedback = 'Brrr, it\'s so cold';
-      } else if (guess >= 30) {
+      } else if ( guessDiff  >= 30) {
         feedback = 'It\'s a little cold';
-      } else if (guess >= 10) {
+      } else if ( guessDiff >= 10) {
         feedback = 'Woah, it got warm just now';
-      } else if (guess >= 5) {
+      } else if ( guessDiff  >= 5) {
         feedback = 'You\'re getting close to the sun!';
-      } else if (guess >= 1) {
+      } else if ( guessDiff  >= 1) {
         feedback = 'Get the ice cubes! It\'s hot in here';
       }
 
       this.setState({
         feedback,
         guesses:[...this.state.guesses, guess]
-      });
-  
+      },
+      // this will be called right after setState is done
+      () => console.log('check state->', this.state)
+      )
     }
 
   render() {
@@ -84,11 +86,11 @@ export default class App extends Component {
           Guess the number between 1 and 100!
         </p>
 
-        <p className="feedback">{this.state.feedback}</p>
+        <p className="feedback">{feedback}</p>
 
         <GuessForm onInput={guess => this.handleGuess(guess)}/>  
         
-        <ShowGuesses guessList={this.state.guesses} /> 
+        <ShowGuesses guessList={guesses} /> 
 
       </div>
     );
@@ -97,6 +99,7 @@ export default class App extends Component {
 
 const styles = {
   button: {
+    // alignSelf: 'right',
     marginTop: 10,
     fontSize: 14,
     width: 100, 

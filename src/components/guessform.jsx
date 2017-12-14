@@ -1,8 +1,6 @@
 import React from 'react';
-
-// or export function GuessForm(props) {}  // no render() needed; just return 
   
-export default class GuessForm extends React.PureComponent { 
+export default class GuessForm extends React.Component { 
   state = {
     userInput: ''
   }

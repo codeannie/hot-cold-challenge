@@ -99,8 +99,9 @@ export default class App extends Component {
 
 const styles = {
   button: {
-    // alignSelf: 'right',
+    alignSelf: 'flex-end',
     marginTop: 10,
+    marginRight: 10,
     fontSize: 14,
     width: 100, 
     border: '1px solid green',

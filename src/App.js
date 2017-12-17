@@ -54,11 +54,15 @@ export default class App extends Component {
       } else if ( guessDiff  >= 50) {
         feedback = 'Brrr, it\'s so cold';
       } else if ( guessDiff  >= 30) {
-        feedback = 'It\'s a little cold';
-      } else if ( guessDiff >= 10) {
+        feedback = 'It\'s still cold';
+      } else if ( guessDiff >= 20) {
+        feedback = 'It\'s only a little cold';
+      } else if ( guessDiff >= 15) {
         feedback = 'Woah, it got warm just now';
+      } else if ( guessDiff >= 10) {
+        feedback = 'It\'s getting warmer in here';
       } else if ( guessDiff  >= 5) {
-        feedback = 'You\'re getting close to the sun!';
+        feedback = 'Ahh, getting closer to the sun!';
       } else if ( guessDiff  >= 1) {
         feedback = 'Get the ice cubes! It\'s hot in here';
       }
